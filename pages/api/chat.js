@@ -1,7 +1,28 @@
 // API route for LLM chat completion
 // Supports multiple lightweight uncensored LLM providers
 
+// Note: In-memory rate limiting has limitations in serverless environments
+// where function instances don't share state. For production use with high
+// traffic, consider using external storage (Redis, DynamoDB, etc.)
 const rateLimitMap = new Map();
+
+function getClientIP(req) {
+  // Try to get the real IP, but be aware this can be spoofed
+  // In production, consider using Vercel's or Netlify's trusted proxy headers
+  const forwarded = req.headers['x-forwarded-for'];
+  const realIp = req.headers['x-real-ip'];
+  
+  if (forwarded) {
+    // Take the first IP in the chain (client IP)
+    return forwarded.split(',')[0].trim();
+  }
+  
+  if (realIp) {
+    return realIp;
+  }
+  
+  return req.socket.remoteAddress || 'unknown';
+}
 
 function checkRateLimit(ip) {
   const limit = parseInt(process.env.RATE_LIMIT || '10');
@@ -144,7 +165,7 @@ export default async function handler(req, res) {
   }
 
   // Get client IP for rate limiting
-  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown';
+  const ip = getClientIP(req);
   
   // Check rate limit
   if (!checkRateLimit(ip)) {
