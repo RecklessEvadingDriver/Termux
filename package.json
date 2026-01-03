@@ -1,0 +1,34 @@
+{
+  "name": "termux-llm",
+  "version": "1.0.0",
+  "description": "Lightweight uncensored LLM service for Vercel/Netlify/Heroku",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "vercel",
+    "netlify",
+    "heroku"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@netlify/plugin-nextjs": "^5.0.0",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
