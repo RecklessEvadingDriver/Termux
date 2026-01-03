@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "LLM_PROVIDER": "@llm_provider",
+    "TOGETHER_API_KEY": "@together_api_key",
+    "TOGETHER_MODEL": "@together_model",
+    "RATE_LIMIT": "@rate_limit",
+    "MAX_TOKENS": "@max_tokens"
+  }
+}

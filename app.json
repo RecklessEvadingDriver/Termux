@@ -1,0 +1,33 @@
+{
+  "name": "termux-llm",
+  "description": "Lightweight uncensored LLM service",
+  "repository": "https://github.com/RecklessEvadingDriver/Termux",
+  "keywords": ["llm", "ai", "chat"],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "LLM_PROVIDER": {
+      "description": "LLM provider to use (together, huggingface, or openrouter)",
+      "value": "together"
+    },
+    "TOGETHER_API_KEY": {
+      "description": "Together AI API key",
+      "required": false
+    },
+    "TOGETHER_MODEL": {
+      "description": "Together AI model to use",
+      "value": "NousResearch/Nous-Hermes-2-Mixtral-8x7B-DPO"
+    },
+    "RATE_LIMIT": {
+      "description": "Rate limit (requests per minute)",
+      "value": "10"
+    },
+    "MAX_TOKENS": {
+      "description": "Maximum response tokens",
+      "value": "512"
+    }
+  }
+}
